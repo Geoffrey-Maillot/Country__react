@@ -1,0 +1,19 @@
+.ui.doubling.stackable.four.cards {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .header {
+    box-shadow: none;
+    padding-left: 0;
+    margin-bottom: 0px;
+  }
+
+  .ui.card {
+    width: calc(21.1% - 1em);
+    min-width: 281.39px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+  }
+}
