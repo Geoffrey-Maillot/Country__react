@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'semantic-ui-react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import './styles.scss';
 
 const country = ({ listCountry }) => {
@@ -22,7 +22,12 @@ const country = ({ listCountry }) => {
   } = Country;
   return (
     <main className="country">
-      <Button />
+      <Link to="/">
+        <div className="country__button">
+          <Button content="Back" icon="left arrow" />
+        </div>
+      </Link>
+
       <div className="country__container-flex">
         <div className="container-flex--elem-img">
           <img src={flag} alt="carte" />
@@ -61,6 +66,7 @@ const country = ({ listCountry }) => {
                 ))}
               </p>
               <p>
+                Languages:
                 {languages.map((language) => (
                   <span key={language.name}>{language.name}</span>
                 ))}
@@ -84,7 +90,7 @@ const country = ({ listCountry }) => {
 };
 
 country.propTypes = {
-  listCountry: PropTypes.object.isRequired,
+  listCountry: PropTypes.array.isRequired,
 };
 
 export default country;
