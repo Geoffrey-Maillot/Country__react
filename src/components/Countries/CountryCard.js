@@ -1,12 +1,13 @@
+/* eslint-disable object-curly-newline */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, Image } from 'semantic-ui-react';
 import './styles.scss';
 
 const CountryCard = ({ name, population, region, capital, flag }) => (
   <Card>
-    <Link to={`/country/${name}`} >
+    <Link to={`/country/${name}`}>
       <Image src={flag} />
     </Link>
     <CardContent>
@@ -23,7 +24,6 @@ const CountryCard = ({ name, population, region, capital, flag }) => (
       </CardDescription>
     </CardContent>
   </Card>
-
 );
 
 CountryCard.propTypes = {

@@ -24,21 +24,27 @@ const App = () => {
   const requestByName = async () => {
     const allCountry = await axios.get(`/name/${inputValue}`).then((response) => response.data);
     await setListCountry(allCountry);
-  }
+  };
 
   const requestByRegion = async () => {
-    console.log(selectValue)
     const allCountry = await axios.get(`/region/${selectValue}`).then((response) => response.data);
     await setListCountry(allCountry);
-  }
+  };
 
+  const onClickSearch = (name) => {
+    setInputValue(name);
+    requestByName();
+  };
 
   useEffect(() => {
     firstRequest();
   }, []);
 
   const ValidForm = () => {
-    requestByName()
+    if (inputValue === '') {
+      firstRequest();
+    }
+    requestByName();
   };
 
   return (
@@ -54,12 +60,11 @@ const App = () => {
           requestByRegion={requestByRegion}
           firstRequest={firstRequest}
         />
-        <Countries listCountry={listCountry} />
+        <Countries listCountry={listCountry} onClickSearch={onClickSearch} />
       </Route>
-      <Route path="/country/:name">
-        <Country />
+      <Route path="/country/:countryName" exact>
+        <Country listCountry={listCountry} />
       </Route>
-
     </div>
   );
 };

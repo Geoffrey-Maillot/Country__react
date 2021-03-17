@@ -1,60 +1,90 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-router-dom';
+import { Button } from 'semantic-ui-react';
+import { useParams } from 'react-router-dom';
 import './styles.scss';
 
-const country = () => (
-  <main className="country">
-    <Button  />
-    <div className="country__container-flex">
-      <div className="container-flex--elem-img">
-        <img src="https://restcountries.eu/data/deu.svg" alt="carte" />
-      </div>
-      <div className="container-flex--elem-info">
-        <h2 className="info-title">Belgium</h2>
-        <div className="info-container-flex">
-          <div className="info-container-flex-left">
-            <p>
-              Native Name: <span>België</span>
-            </p>
-            <p>
-              Population: <span>11,319,511</span>
-            </p>
-            <p>
-              Region: <span>Europe</span>
-            </p>
-            <p>
-              Sub Region: <span>Western Europe</span>
-            </p>
-            <p>
-              Capital: <span>Brussels</span>
-            </p>
+const country = ({ listCountry }) => {
+  const { countryName } = useParams();
+  const Country = listCountry.find((item) => item.name === countryName);
+  const {
+    name,
+    nativeName,
+    population,
+    region,
+    subregion,
+    capital,
+    topLevelDomain,
+    currencies,
+    languages,
+    borders,
+    flag,
+  } = Country;
+  return (
+    <main className="country">
+      <Button />
+      <div className="country__container-flex">
+        <div className="container-flex--elem-img">
+          <img src={flag} alt="carte" />
+        </div>
+        <div className="container-flex--elem-info">
+          <h2 className="info-title">{name}</h2>
+          <div className="info-container-flex">
+            <div className="info-container-flex-left">
+              <p>
+                Native Name: <span>{nativeName}</span>
+              </p>
+              <p>
+                Population: <span>{population}</span>
+              </p>
+              <p>
+                Region: <span>{region}</span>
+              </p>
+              <p>
+                Sub Region: <span>{subregion}</span>
+              </p>
+              <p>
+                Capital: <span>{capital}</span>
+              </p>
+            </div>
+            <div className="info-container-flex-right">
+              <p>
+                Top Level Domain:
+                {topLevelDomain.map((domain) => (
+                  <span key={domain}> {domain}</span>
+                ))}
+              </p>
+              <p>
+                Currencies:
+                {currencies.map((currency) => (
+                  <span key={currency.name}>{currency.name}</span>
+                ))}
+              </p>
+              <p>
+                {languages.map((language) => (
+                  <span key={language.name}>{language.name}</span>
+                ))}
+              </p>
+            </div>
           </div>
-          <div className="info-container-flex-right">
-            <p>
-              Top Level Domain: <span>.be</span>
-            </p>
-            <p>
-              Currencies: <span>Euro</span>
-            </p>
-            <p>
-              Languages: <span>Dutch, French, German</span>
-            </p>
+          <div className="border-countries">
+            <p>Border Countries:</p>
+            <ul className="border-countries__lists">
+              {borders.map((border) => (
+                <li className="border-countries__lists-elem" key={border}>
+                  {border}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-        <div className="border-countries">
-          <p>Border Countries:</p>
-          <ul className="border-countries__lists">
-            <li className="border-countries__lists-elem">France</li>
-            <li className="border-countries__lists-elem">Germany</li>
-            <li className="border-countries__lists-elem">Netherlands</li>
-          </ul>
-        </div>
       </div>
-    </div>
-  </main>
-);
+    </main>
+  );
+};
 
-country.propTypes = {};
+country.propTypes = {
+  listCountry: PropTypes.object.isRequired,
+};
 
 export default country;
