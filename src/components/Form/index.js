@@ -3,14 +3,22 @@ import PropTypes from 'prop-types';
 import { Input, Select } from 'semantic-ui-react';
 import './styles.scss';
 
-const Form = ({ onInputChange, onSelectChange, ValidForm, inputValue, selectValue, requestByRegion, firstRequest }) => {
+const Form = ({
+  onInputChange,
+  onSelectChange,
+  ValidForm,
+  inputValue,
+  selectValue,
+  requestByRegion,
+  firstRequest,
+}) => {
   const regionOptions = [
-    { key: 're', value: 'all', text: 'All' },
-    { key: 'af', value: 'africa', text: 'Africa' },
-    { key: 'am', value: 'america', text: 'America' },
-    { key: 'as', value: 'asia', text: 'Asia' },
-    { key: 'eu', value: 'europe', text: 'Europe' },
-    { key: 'oc', value: 'oceania', text: 'Oceania' },
+    { key: 're', value: 'All', text: 'All' },
+    { key: 'af', value: 'Africa', text: 'Africa' },
+    { key: 'am', value: 'Americas', text: 'America' },
+    { key: 'as', value: 'Asia', text: 'Asia' },
+    { key: 'eu', value: 'Europe', text: 'Europe' },
+    { key: 'oc', value: 'Oceania', text: 'Oceania' },
   ];
 
   const onValidForm = (e) => {
@@ -34,11 +42,11 @@ const Form = ({ onInputChange, onSelectChange, ValidForm, inputValue, selectValu
         options={regionOptions}
         value={selectValue}
         onChange={(e) => {
-          onSelectChange(e.target.innerText.toLowerCase());
-          if (e.target.innerText.toLowerCase() === 'all') {
+          onSelectChange(e.target.innerText);
+          if (e.target.innerText.toLowerCase() === 'All') {
             firstRequest();
           }
-          requestByRegion()
+          requestByRegion();
         }}
       />
     </form>
@@ -47,7 +55,7 @@ const Form = ({ onInputChange, onSelectChange, ValidForm, inputValue, selectValu
 Form.propTypes = {
   onInputChange: PropTypes.func,
   onSelectChange: PropTypes.func,
-  onValidForm: PropTypes.func,
+  ValidForm: PropTypes.func,
   requestByRegion: PropTypes.func,
   firstRequest: PropTypes.func,
   inputValue: PropTypes.string,
@@ -55,11 +63,11 @@ Form.propTypes = {
 };
 
 Form.defaultProps = {
-  onInputChange: () => { },
-  onSelectChange: () => { },
-  onValidForm: () => { },
-  requestByRegion: () => { },
-  firstRequest: () => { },
+  onInputChange: () => {},
+  onSelectChange: () => {},
+  ValidForm: () => {},
+  requestByRegion: () => {},
+  firstRequest: () => {},
   inputValue: '',
   selectValue: '',
 };

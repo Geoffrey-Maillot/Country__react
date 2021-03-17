@@ -1,12 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'semantic-ui-react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Redirect } from 'react-router-dom';
 import './styles.scss';
 
 const country = ({ listCountry }) => {
   const { countryName } = useParams();
+
   const Country = listCountry.find((item) => item.name === countryName);
+  if (!Country) {
+    return <Redirect to="/Country-not-found" />;
+  }
+
   const {
     name,
     nativeName,
@@ -20,6 +25,7 @@ const country = ({ listCountry }) => {
     borders,
     flag,
   } = Country;
+
   return (
     <main className="country">
       <Link to="/">
