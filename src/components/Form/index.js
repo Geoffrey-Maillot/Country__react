@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Input, Select } from 'semantic-ui-react';
 import './styles.scss';
 
-const Form = ({ onInputChange, onSelectChange, ValidForm, inputValue, selectValue }) => {
+const Form = ({ onInputChange, onSelectChange, ValidForm, inputValue, selectValue, requestByRegion, firstRequest }) => {
   const regionOptions = [
     { key: 're', value: 'all', text: 'All' },
     { key: 'af', value: 'africa', text: 'Africa' },
@@ -31,11 +31,14 @@ const Form = ({ onInputChange, onSelectChange, ValidForm, inputValue, selectValu
       />
       <Select
         placeholder="Filter by Region"
-        name="region"
         options={regionOptions}
         value={selectValue}
         onChange={(e) => {
           onSelectChange(e.target.innerText.toLowerCase());
+          if (e.target.innerText.toLowerCase() === 'all') {
+            firstRequest();
+          }
+          requestByRegion()
         }}
       />
     </form>
@@ -45,14 +48,18 @@ Form.propTypes = {
   onInputChange: PropTypes.func,
   onSelectChange: PropTypes.func,
   onValidForm: PropTypes.func,
+  requestByRegion: PropTypes.func,
+  firstRequest: PropTypes.func,
   inputValue: PropTypes.string,
   selectValue: PropTypes.string,
 };
 
 Form.defaultProps = {
-  onInputChange: () => {},
-  onSelectChange: () => {},
-  onValidForm: () => {},
+  onInputChange: () => { },
+  onSelectChange: () => { },
+  onValidForm: () => { },
+  requestByRegion: () => { },
+  firstRequest: () => { },
   inputValue: '',
   selectValue: '',
 };

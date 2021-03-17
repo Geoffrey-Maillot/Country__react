@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-router-dom';
 import './styles.scss';
 
 const country = () => (
   <main className="country">
-    <button type="button" className="country__button">
-      Back
-    </button>
+    <Button  />
     <div className="country__container-flex">
       <div className="container-flex--elem-img">
         <img src="https://restcountries.eu/data/deu.svg" alt="carte" />

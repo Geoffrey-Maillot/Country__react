@@ -1,6 +1,7 @@
 // == Import npm
 import React, { useState, useEffect } from 'react';
 import axios from 'src/api';
+import { Route } from 'react-router-dom';
 
 // == Import
 import './styles.scss';
@@ -20,26 +21,45 @@ const App = () => {
     await setListCountry(allCountry);
   };
 
+  const requestByName = async () => {
+    const allCountry = await axios.get(`/name/${inputValue}`).then((response) => response.data);
+    await setListCountry(allCountry);
+  }
+
+  const requestByRegion = async () => {
+    console.log(selectValue)
+    const allCountry = await axios.get(`/region/${selectValue}`).then((response) => response.data);
+    await setListCountry(allCountry);
+  }
+
+
   useEffect(() => {
     firstRequest();
   }, []);
 
   const ValidForm = () => {
-    console.log(inputValue);
-    console.log(selectValue);
+    requestByName()
   };
 
   return (
     <div className="app">
       <Header />
-      <Form
-        onInputChange={setInputValue}
-        onSelectChange={setSelectValue}
-        ValidForm={ValidForm}
-        inputValue={inputValue}
-        selectValue={selectValue}
-      />
-      <Countries listCountry={listCountry} />
+      <Route path="/" exact>
+        <Form
+          onInputChange={setInputValue}
+          onSelectChange={setSelectValue}
+          ValidForm={ValidForm}
+          inputValue={inputValue}
+          selectValue={selectValue}
+          requestByRegion={requestByRegion}
+          firstRequest={firstRequest}
+        />
+        <Countries listCountry={listCountry} />
+      </Route>
+      <Route path="/country/:name">
+        <Country />
+      </Route>
+
     </div>
   );
 };
