@@ -40,6 +40,7 @@ const App = () => {
       setloading(false);
     } catch (error) {
       console.error(error);
+
       setloading(false);
       return <Redirect to="/countries-not-found" />;
     }
@@ -59,6 +60,12 @@ const App = () => {
       return <Redirect to="/Coutry-not-found" />;
     }
   };
+
+  useEffect(() => {
+    if (selectValue !== '') {
+      requestByRegion();
+    }
+  }, [selectValue]);
 
   const onClickSearch = (name) => {
     setInputValue(name);

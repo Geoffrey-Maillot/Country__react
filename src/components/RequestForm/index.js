@@ -33,8 +33,7 @@ const Form = ({ onInputChange, onSelectChange, ValidForm, inputValue, selectValu
         placeholder="Filter by Region"
         options={regionOptions}
         value={selectValue}
-        onChange={(e) => {
-          console.log(e.target.value); // undefined ??
+        onClick={(e) => {
           onSelectChange(e.target.innerText);
         }}
       />

@@ -5,7 +5,7 @@ import './styles.scss';
 
 const Header = () => (
   <header className="header">
-    <Link exact to="/" className="header__title">
+    <Link to="/" className="header__title">
       Where in the world?{' '}
     </Link>
     <div className="header__button">
