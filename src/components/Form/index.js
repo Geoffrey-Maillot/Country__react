@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Input, Select } from 'semantic-ui-react';
 import './styles.scss';
 
-const Form = ({ onInputChange, onSelectChange, ValidForm, inputValue, selectValue }) => {
+const Form = ({ onInputChange, onSelectChange, ValidForm, inputValue, selectValue, error }) => {
   const regionOptions = [
     { key: 'Africa', value: 'Africa', text: 'Africa' },
     { key: 'Americas', value: 'Americas', text: 'Americas' },
@@ -13,17 +13,28 @@ const Form = ({ onInputChange, onSelectChange, ValidForm, inputValue, selectValu
   ];
 
   const onValidForm = (e) => {
-    if (e) e.preventDefault();
+    e.preventDefault();
+    onInputChange('');
     ValidForm();
   };
+
+  let content = '';
+
+  if (error) {
+    content = 'No result...';
+  } else {
+    content = 'Search for a country';
+  }
 
   return (
     <form className="form" onSubmit={onValidForm}>
       <Input
-        placeholder="Search for a country"
+        placeholder={content}
         icon="search"
         color="black"
         iconPosition="left"
+        required
+        error={error}
         value={inputValue}
         onChange={(e) => {
           onInputChange(e.target.value);
@@ -34,7 +45,7 @@ const Form = ({ onInputChange, onSelectChange, ValidForm, inputValue, selectValu
         options={regionOptions}
         value={selectValue}
         onChange={(e) => {
-          console.log(e.target.value); // undefined ??
+          console.dir(e.target.value); // undefined ??
           onSelectChange(e.target.innerText);
         }}
       />

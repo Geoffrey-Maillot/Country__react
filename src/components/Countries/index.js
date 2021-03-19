@@ -4,10 +4,10 @@ import { Card } from 'semantic-ui-react';
 import CountryCard from './CountryCard';
 import './styles.scss';
 
-const Countries = ({ listCountry, onClickSearch }) => (
+const Countries = ({ listCountry }) => (
   <Card.Group itemsPerRow={4} stackable doubling>
     {listCountry.map((country) => (
-      <CountryCard key={country.name} {...country} onClickSearch={onClickSearch} />
+      <CountryCard key={country.name} {...country} />
     ))}
   </Card.Group>
 );
@@ -17,7 +17,6 @@ Countries.propTypes = {
       name: PropTypes.string,
     }),
   ).isRequired,
-  onClickSearch: PropTypes.func.isRequired,
 };
 
 export default Countries;

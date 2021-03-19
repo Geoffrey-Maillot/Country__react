@@ -18,15 +18,18 @@ const App = () => {
   const [selectValue, setSelectValue] = useState('');
   const [listCountry, setListCountry] = useState([]);
   const [loadind, setloading] = useState(true);
+  const [error, setError] = useState(false);
 
   const firstRequest = async () => {
     setloading(true);
+    setInputValue('');
     try {
       const allCountry = await axios.get('/all').then((response) => response.data);
       await setListCountry(allCountry);
+      await setError(false);
       await setloading(false);
-    } catch (error) {
-      console.log(error);
+    } catch (er) {
+      console.error(er);
       await setloading(false);
       return <Redirect to="/Countries-not-found" />;
     }
@@ -37,12 +40,12 @@ const App = () => {
     try {
       const allCountry = await axios.get(`/name/${inputValue}`).then((response) => response.data);
       await setListCountry(allCountry);
+      await setError(false);
+      await setloading(false);
+    } catch (er) {
+      console.error(er);
+      setError(true);
       setloading(false);
-    } catch (error) {
-      console.error(error);
-
-      setloading(false);
-      return <Redirect to="/countries-not-found" />;
     }
   };
 
@@ -53,9 +56,10 @@ const App = () => {
         .get(`/region/${selectValue}`)
         .then((response) => response.data);
       await setListCountry(allCountry);
+      await setError(false);
       await setloading(false);
-    } catch (error) {
-      console.log(error);
+    } catch (er) {
+      console.error(er);
       setloading(false);
       return <Redirect to="/Coutry-not-found" />;
     }
@@ -63,14 +67,10 @@ const App = () => {
 
   useEffect(() => {
     if (selectValue !== '') {
+      setInputValue('');
       requestByRegion();
     }
   }, [selectValue]);
-
-  const onClickSearch = (name) => {
-    setInputValue(name);
-    requestByName();
-  };
 
   useEffect(() => {
     firstRequest();
@@ -85,7 +85,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <Header />
+      <Header firstRequest={firstRequest} />
       {!loadind && (
         <>
           <Switch>
@@ -98,8 +98,9 @@ const App = () => {
                 selectValue={selectValue}
                 requestByRegion={requestByRegion}
                 firstRequest={firstRequest}
+                error={error}
               />
-              <Countries listCountry={listCountry} onClickSearch={onClickSearch} />
+              <Countries listCountry={listCountry} />
             </Route>
             <Route path="/country/:countryName" exact>
               <Country listCountry={listCountry} />
