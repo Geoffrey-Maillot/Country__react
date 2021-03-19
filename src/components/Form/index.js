@@ -31,6 +31,7 @@ const Form = ({
       <Input
         placeholder="Search for a country"
         icon="search"
+        color="black"
         iconPosition="left"
         value={inputValue}
         onChange={(e) => {

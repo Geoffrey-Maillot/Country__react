@@ -17,3 +17,15 @@
     margin-bottom: 40px;
   }
 }
+
+@media screen and (max-width: 800px) {
+  .ui.doubling.stackable.four.cards {
+    .ui.card {
+      max-width: 586.5px;
+      min-width: 281.39px;
+
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}

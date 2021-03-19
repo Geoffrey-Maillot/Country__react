@@ -5,7 +5,9 @@ import './styles.scss';
 
 const Header = () => (
   <header className="header">
-    <Link exact to="/" className="header__title">Where in the world? </Link>
+    <Link exact to="/" className="header__title">
+      Where in the world?{' '}
+    </Link>
     <div className="header__button">
       <Button icon="moon outline" className="header__button--button" content="Dark mode" />
     </div>

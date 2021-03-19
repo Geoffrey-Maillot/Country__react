@@ -6,11 +6,11 @@ import { Card, CardContent, CardDescription, CardHeader, Image } from 'semantic-
 import './styles.scss';
 
 const CountryCard = ({ name, population, region, capital, flag }) => (
-  <Card>
+  <Card color="black">
     <Link to={`/country/${name}`}>
       <Image src={flag} />
     </Link>
-    <CardContent>
+    <CardContent className="dark">
       <CardHeader>{name}</CardHeader>
       <CardDescription>
         <strong>Population:</strong>

@@ -16,5 +16,22 @@
     border: none;
     outline: none;
     box-shadow: 0 0 5px #e0e1e2;
+    width: 196px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .form {
+    flex-direction: column;
+
+    .input {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .ui.selection.dropdown {
+      border: none;
+      outline: none;
+      box-shadow: 0 0 5px #e0e1e2;
+    }
   }
 }
