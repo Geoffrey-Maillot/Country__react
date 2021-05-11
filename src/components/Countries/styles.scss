@@ -1,3 +1,5 @@
+@use 'src/styles/vars';
+
 .ui.doubling.stackable.four.cards {
   max-width: 1400px;
   margin-left: auto;
@@ -15,6 +17,18 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 40px;
+  }
+
+  .ui.card.card-dark {
+    background: vars.$dark-mode-main;
+    color: vars.$dark-mode-text;
+    box-shadow: vars.$dark-mode-shadow;
+  }
+  .ui.card > .content > .description {
+    color: inherit;
+  }
+  .ui.card > .content > .header {
+    color: inherit;
   }
 }
 

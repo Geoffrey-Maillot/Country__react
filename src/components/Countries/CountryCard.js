@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, Image } from 'semantic-ui-react';
 import './styles.scss';
+import classNames from 'classnames';
 
-const CountryCard = ({ name, population, region, capital, flag }) => (
-  <Card color="black">
+const CountryCard = ({ name, population, region, capital, flag, dark }) => (
+  <Card className={classNames({ 'card-dark': dark, 'card-light': !dark })}>
     <Link to={`/country/${name}`}>
       <Image src={flag} />
     </Link>
-    <CardContent className="dark">
+    <CardContent>
       <CardHeader>{name}</CardHeader>
       <CardDescription>
         <strong>Population:</strong>
@@ -27,6 +28,7 @@ const CountryCard = ({ name, population, region, capital, flag }) => (
 );
 
 CountryCard.propTypes = {
+  dark: PropTypes.bool.isRequired,
   name: PropTypes.string,
   population: PropTypes.number,
   region: PropTypes.string,
