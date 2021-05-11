@@ -1,23 +1,40 @@
+@use 'src/styles/vars';
+
 .header {
-  background-color: #fff;
-  max-width: 1400px;
-  padding: 15px;
+  width: 100%;
+  padding: 20px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 3px 5px #e0e1e2;
   margin-bottom: 30px;
   &__title {
-    color: black;
     font-size: 1.5rem;
     font-weight: 700;
     cursor: pointer;
+    color: inherit;
   }
 
   .button {
     background-color: transparent;
-    color: black;
+    color: inherit;
   }
+  .button:focus,
+  .button:hover {
+    background-color: transparent;
+    color: inherit;
+  }
+}
+
+.header-light {
+  background-color: vars.$light-mode-main;
+  box-shadow: vars.$light-mode-shadow;
+  color: vars.$light-mode-text;
+}
+
+.header-dark {
+  background-color: vars.$dark-mode-main;
+  box-shadow: vars.$dark-mode-shadow;
+  color: vars.$dark-mode-text;
 }

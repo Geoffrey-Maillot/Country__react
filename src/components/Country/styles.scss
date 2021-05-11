@@ -1,3 +1,12 @@
+@use 'src/styles/vars';
+
+.country-dark {
+  color: vars.$dark-mode-text;
+}
+.country-light {
+  color: vars.$light-mode-text;
+}
+
 .country {
   max-width: 1400px;
   margin-left: auto;
@@ -15,11 +24,20 @@
   }
 
   .ui.button {
-    box-shadow: 0 0 5px #a5a5a5;
-    color: black;
-    background-color: transparent;
+    color: inherit;
     padding: 0.8rem 2.5rem;
     margin: 30px 0 60px 0;
+  }
+  .ui.button.button-dark {
+    color: vars.$dark-mode-text;
+    background: vars.$dark-mode-main;
+    box-shadow: vars.$dark-mode-shadow;
+  }
+
+  .ui.button.button-light {
+    color: vars.$light-mode-text;
+    background: vars.$light-mode-main;
+    box-shadow: vars.$light-mode-shadow;
   }
 
   &__container-flex {
@@ -36,12 +54,6 @@
       .info-container-flex {
         display: flex;
         justify-content: space-between;
-
-        &-left {
-        }
-
-        &-right {
-        }
       }
 
       .border-countries {
@@ -58,11 +70,17 @@
           justify-content: flex-start;
           flex-wrap: wrap;
           &-elem {
-            box-shadow: 0 0 5px #a5a5a5;
-            color: black;
-            background-color: transparent;
             padding: 0.2rem 1rem;
             margin: 5px 5px;
+          }
+
+          &-elem-dark {
+            box-shadow: vars.$dark-mode-shadow;
+            background: vars.$dark-mode-main;
+          }
+          &-elem-light {
+            box-shadow: vars.$light-mode-shadow;
+            background: vars.$light-mode-main;
           }
         }
       }

@@ -1,9 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { Input, Select } from 'semantic-ui-react';
 import './styles.scss';
 
-const Form = ({ onInputChange, onSelectChange, ValidForm, inputValue, selectValue, error }) => {
+const Form = ({
+  onInputChange,
+  onSelectChange,
+  ValidForm,
+  inputValue,
+  selectValue,
+  error,
+  dark,
+}) => {
   const regionOptions = [
     { key: 'Africa', value: 'Africa', text: 'Africa' },
     { key: 'Americas', value: 'Americas', text: 'Americas' },
@@ -29,6 +38,7 @@ const Form = ({ onInputChange, onSelectChange, ValidForm, inputValue, selectValu
   return (
     <form className="form" onSubmit={onValidForm}>
       <Input
+        className={classNames('form__input', { 'input-dark': dark, 'input-light': !dark })}
         placeholder={content}
         icon="search"
         color="black"
@@ -42,6 +52,7 @@ const Form = ({ onInputChange, onSelectChange, ValidForm, inputValue, selectValu
       />
       <Select
         placeholder="Filter by Region"
+        className={classNames('form__select', { 'select-dark': dark, 'select-light': !dark })}
         options={regionOptions}
         value={selectValue}
         onChange={(e) => {
@@ -58,6 +69,8 @@ Form.propTypes = {
   ValidForm: PropTypes.func,
   inputValue: PropTypes.string,
   selectValue: PropTypes.string,
+  error: PropTypes.bool.isRequired,
+  dark: PropTypes.bool.isRequired,
 };
 
 Form.defaultProps = {

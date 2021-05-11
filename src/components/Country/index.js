@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { Button } from 'semantic-ui-react';
 import { useParams, Link, Redirect } from 'react-router-dom';
 import './styles.scss';
 
-const country = ({ listCountry }) => {
+const country = ({ listCountry, dark }) => {
   const { countryName } = useParams();
 
   const Country = listCountry.find((item) => item.name === countryName);
@@ -27,11 +28,13 @@ const country = ({ listCountry }) => {
   } = Country;
 
   return (
-    <main className="country">
+    <main className={classNames('country', { 'country-dark': dark, 'country-light': !dark })}>
       <Link to="/">
-        <div className="country__button">
-          <Button content="Back" icon="left arrow" />
-        </div>
+        <Button
+          content="Back"
+          icon="left arrow"
+          className={classNames({ 'button-dark': dark, 'button-light': !dark })}
+        />
       </Link>
 
       <div className="country__container-flex">
@@ -83,7 +86,13 @@ const country = ({ listCountry }) => {
             <p>Border Countries:</p>
             <ul className="border-countries__lists">
               {borders.map((border) => (
-                <li className="border-countries__lists-elem" key={border}>
+                <li
+                  className={classNames('border-countries__lists-elem', {
+                    'border-countries__lists-elem-dark': dark,
+                    'border-countries__lists-elem-light': !dark,
+                  })}
+                  key={border}
+                >
                   {border}
                 </li>
               ))}
@@ -97,6 +106,7 @@ const country = ({ listCountry }) => {
 
 country.propTypes = {
   listCountry: PropTypes.array.isRequired,
+  dark: PropTypes.bool.isRequired,
 };
 
 export default country;

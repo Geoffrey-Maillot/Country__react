@@ -1,3 +1,5 @@
+@use 'src/styles/vars';
+
 .form {
   max-width: 1400px;
   padding: 15px;
@@ -7,16 +9,43 @@
   display: flex;
   justify-content: space-between;
 
-  .input {
+  .ui.input .form__input {
     border: none;
     outline: none;
-    box-shadow: 0 0 5px #e0e1e2;
   }
-  .ui.selection.dropdown {
+
+  .ui .form__select {
     border: none;
     outline: none;
-    box-shadow: 0 0 5px #e0e1e2;
     width: 196px;
+  }
+
+  .ui.select-dark,
+  .input-dark.ui.input > input {
+    box-shadow: vars.$dark-mode-shadow;
+    background-color: vars.$dark-mode-main !important;
+    color: vars.$dark-mode-text;
+  }
+
+  .ui.select-light,
+  .input-light.ui.input > input {
+    box-shadow: vars.$light-mode-shadow;
+    background-color: vars.$light-mode-main !important;
+    color: vars.$light-mode-text;
+  }
+
+  .ui.selection.visible.dropdown > .text:not(.default) {
+    color: inherit;
+  }
+
+  .ui.selection.dropdown:focus .menu {
+    color: inherit;
+    background-color: inherit;
+  }
+  .ui.dropdown .menu > .item {
+    color: inherit;
+
+    border: none;
   }
 }
 
@@ -24,14 +53,12 @@
   .form {
     flex-direction: column;
 
-    .input {
+    &__input {
       width: 100%;
       margin-bottom: 10px;
     }
-    .ui.selection.dropdown {
-      border: none;
-      outline: none;
-      box-shadow: 0 0 5px #e0e1e2;
+    &__select {
+      width: 100%;
     }
   }
 }

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'src/api';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import classNames from 'classnames';
 
 // == Import
 import './styles.scss';
@@ -19,6 +20,7 @@ const App = () => {
   const [listCountry, setListCountry] = useState([]);
   const [loadind, setloading] = useState(true);
   const [error, setError] = useState(false);
+  const [dark, setDark] = useState(false);
 
   const firstRequest = async () => {
     setloading(true);
@@ -84,8 +86,8 @@ const App = () => {
   };
 
   return (
-    <div className="app">
-      <Header firstRequest={firstRequest} />
+    <div className={classNames('app', { 'app-dark': dark, 'app-light': !dark })}>
+      <Header firstRequest={firstRequest} dark={dark} useDarkMode={setDark} />
       {!loadind && (
         <>
           <Switch>
@@ -99,11 +101,12 @@ const App = () => {
                 requestByRegion={requestByRegion}
                 firstRequest={firstRequest}
                 error={error}
+                dark={dark}
               />
-              <Countries listCountry={listCountry} />
+              <Countries listCountry={listCountry} dark={dark} />
             </Route>
             <Route path="/country/:countryName" exact>
-              <Country listCountry={listCountry} />
+              <Country listCountry={listCountry} dark={dark} />
             </Route>
 
             <Route>
